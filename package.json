@@ -11,16 +11,17 @@
     "react": "^16.14.0",
     "react-bootstrap": "^1.3.0",
     "react-dom": "^16.14.0",
-    "react-scripts": "3.4.0"
+    "react-scripts": "3.4.2"
   },
   "scripts": {
-    "test": "react-scripts test",
-    "start": "node index.js",
-    "build": "webpack",
-    "eject": "react-scripts eject"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "engines": {
+    "npm": "6.x"
   },
   "browserslist": {
     "production": [
@@ -33,8 +34,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   }
 }
