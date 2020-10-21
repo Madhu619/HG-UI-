@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/publicis-sapient/precache-manifest.cbbc239874bbcfe38eac2ebea96e8e96.js"
+  "/publicis-sapient/precache-manifest.5caae6fe74c88fa9462756e8754bdce9.js"
 );
 
 self.addEventListener('message', (event) => {
