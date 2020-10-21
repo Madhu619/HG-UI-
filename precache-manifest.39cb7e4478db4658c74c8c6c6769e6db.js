@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9789b7942b7098dd82ef7e4116bf413c",
+    "revision": "c057de4c3ee3ad6951d38c7cbf82aa4a",
     "url": "/publicis-sapient/index.html"
   },
   {
