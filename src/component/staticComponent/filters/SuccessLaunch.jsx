@@ -9,12 +9,12 @@ const styles = {
     }
 }
 
-export default function SuccessFilter ({onLaunchChange}) {
+export default function SuccessFilter ({onLaunchChange, launchFlag}) {
     return (
         <div>
             <div className="text-center divider mb-3 border-bottom mt-3">Successful Launch</div>
-            <button style={styles.year_filter} className='btn btn-success year-filter' onClick={() => onLaunchChange(true)}> True </button>
-            <button style={styles.year_filter} className='btn btn-success year-filter' onClick={() => onLaunchChange(false)}> False </button>
+            <button style={styles.year_filter} className={`btn btn-success year-filter ${launchFlag === true ? 'active' : ''}`} onClick={() => onLaunchChange(true)}> True </button>
+            <button style={styles.year_filter} className={`btn btn-success year-filter ${launchFlag === false ? 'active' : ''}`} onClick={() => onLaunchChange(false)}> False </button>
         </div>
     );
 }

@@ -10,13 +10,13 @@ const styles = {
     }
 }
 
-const YearFilterValues = ({yearChange}) => {
+const YearFilterValues = ({yearChange, selectedYear}) => {
 
     return (
         <>
             <div className="text-center divider mb-3 border-bottom">Launch Year</div>
             <div className='row'>
-                {Years.map(year => <div class="col-sm-6 col-md-6 col-xs-6"><button style={styles.year_filter} className='btn btn-success year-filter'  key={year} onClick={() => yearChange(year)}> {year} </button></div>)} 
+                {Years.map(year => <div class="col-sm-6 col-md-6 col-6"><button class style={styles.year_filter} className={`btn btn-success year-filter  ${selectedYear === year ? 'active' : ''}`}  key={year} onClick={() => yearChange(year)}> {year} </button></div>)} 
             </div>
         </>
     );
@@ -24,3 +24,4 @@ const YearFilterValues = ({yearChange}) => {
 }
 
 export default YearFilterValues;
+//${selectedYear === year ? styles.activeTab : ''}

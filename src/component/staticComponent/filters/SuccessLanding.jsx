@@ -9,13 +9,13 @@ const styles = {
     }
 }
 
-export default function SuccessLanding ({onLandChange}) {
+export default function SuccessLanding ({onLandChange, landFlag}) {
   
     return (
         <div>
             <div className="text-center divider mb-3 border-bottom mt-3">Successful Landing</div>
-            <button style={styles.year_filter} className='btn btn-success year-filter'  onClick={() => onLandChange(true)}> True </button>
-            <button style={styles.year_filter} className='btn btn-success year-filter'  onClick={() => onLandChange(false)}> False </button>
+            <button style={styles.year_filter} className={`btn btn-success year-filter ${landFlag === true ? 'active' : ''}`}  onClick={() => onLandChange(true)}> True </button>
+            <button style={styles.year_filter} className={`btn btn-success year-filter ${landFlag === false ? 'active' : ''}`}  onClick={() => onLandChange(false)}> False </button>
         </div>
     );
 }

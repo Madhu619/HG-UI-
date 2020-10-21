@@ -14,10 +14,13 @@ class App extends React.Component {
       this.state = {
          data: [],
          isLoaded : false,
-         url: 'https://api.spaceXdata.com/v3/launches?limit=100'
+         url: 'https://api.spaceXdata.com/v3/launches?limit=100',
+         year:2006,
+         launchFlag: '',
+         landFlag: '',
       }
    };
-
+  
   onDataReceived = (data) => {
     this.setState({
       data: data,
@@ -33,7 +36,7 @@ class App extends React.Component {
     } else {
       previousLaunchValue = this.state.url + '&launch_year='+year;
     }
-    this.setState({ isLoaded: false, url: previousLaunchValue});
+    this.setState({ isLoaded: false, url: previousLaunchValue, year: year});
 
     $.get(previousLaunchValue, function(result) {
       this.onDataReceived(result);
@@ -50,7 +53,7 @@ class App extends React.Component {
       previousLaunchValue = this.state.url+'&launch_success='+flag;
     }
 
-    this.setState({ isLoaded: false, url: previousLaunchValue });
+    this.setState({ isLoaded: false, url: previousLaunchValue, launchFlag:flag });
 
     $.get(previousLaunchValue, function(result) {
       this.onDataReceived(result);
@@ -67,7 +70,7 @@ class App extends React.Component {
       previousLaunchValue = this.state.url+'&land_success='+flag;
     }
 
-    this.setState({ isLoaded: false, url: previousLaunchValue});
+    this.setState({ isLoaded: false, url: previousLaunchValue, landFlag:flag});
 
     $.get(previousLaunchValue, function(result) {
       this.onDataReceived(result);
@@ -89,11 +92,11 @@ class App extends React.Component {
             <Row>
               <h1 className='m-4'> SpacEx Launch Programs</h1>
             </Row>
-            <Row>
-              <Col md={3} sm={6}  className='mb-4 col-xs-12' ><Navbar yearChange={this.onYearChange} onLaunchChange = {this.onLaunchChange} onLandChange = {this.onLandChange}/> </Col>
+            <Row className='text-center'>
+              <Col md={4} sm={6}  className='mb-4 col-xs-12' ><Navbar year= {this.state.year} yearChange={this.onYearChange} onLaunchChange = {this.onLaunchChange} onLandChange = {this.onLandChange} launchFlag={this.state.launchFlag} landFlag={this.state.landFlag} /> </Col>
 
-              {this.state.data.length > 0 && <Col md={9} sm={6}> <CreateDataView data = {this.state.data}/> </Col>}
-              {this.state.data.length === 0 && <Col md={9} sm={6}>  <img width='100%' src={`${NoData}`} alt='No Data'></img> </Col> }
+              {this.state.data.length > 0 && <Col md={8} sm={6}> <CreateDataView data = {this.state.data}/> </Col>}
+              {this.state.data.length === 0 && <Col md={8} sm={6}>  <img width='100%' src={`${NoData}`} alt='No Data'></img> </Col> }
             </Row>
           </Container>
         </>

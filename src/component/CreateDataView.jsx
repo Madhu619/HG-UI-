@@ -7,7 +7,7 @@ const CreateDataView = ({ data }) => {
 	return (
 		<>
 			<Row>
-				{data.map(flight => <Col md={4} xl={3} sm={12} className="col-xs-12">  <DisplayCards key={flight.flight_number} flight={flight} /> </Col>)} 
+				{data.map(flight => <Col md={6} xl={3} sm={12} className="col-xs-12">  <DisplayCards key={flight.flight_number} flight={flight} /> </Col>)} 
 			</Row>
 		</>
 	);

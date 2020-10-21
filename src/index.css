@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.btn-success.year-filter.active {
+  background: rgb(40,167,69) !important;
+  color: #ffffff !important;
+}
