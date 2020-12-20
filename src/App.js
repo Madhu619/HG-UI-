@@ -5,7 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Loader from './component/staticComponent/Loader';
 import NoData from './component/staticComponent/NoData.png';
 import Navbar from './component/navbar/Navbar';
-import CreateDataView from './component/CreateDataView';
+import FilterButtons from './component/staticComponent/FilterButtons';
+import LoadCards from './component/staticComponent/LoadCards';
 
 class App extends React.Component {
    constructor(props) {
@@ -14,10 +15,7 @@ class App extends React.Component {
       this.state = {
          data: [],
          isLoaded : false,
-         url: 'https://api.spaceXdata.com/v3/launches?limit=100',
-         year:2006,
-         launchFlag: '',
-         landFlag: '',
+         url: 'https://staging.healthandglow.com/api/catalog/product/v6/search/999?app=web&version=3.0.2&tag=loreal-paris&page=0:20',
       }
    };
   
@@ -28,51 +26,28 @@ class App extends React.Component {
     });
   }
 
-  onYearChange = (year) => {
+  onApplySort = (sortOption) => {
     let previousLaunchValue = new URL(this.state.url);
-    if (previousLaunchValue.searchParams.get('launch_year') !== null) {
-      previousLaunchValue.searchParams.set('launch_year', year);
+    if (previousLaunchValue.searchParams.get('sort') !== null) {
+      previousLaunchValue.searchParams.set('sort', sortOption);
       previousLaunchValue = previousLaunchValue.href;
     } else {
-      previousLaunchValue = this.state.url + '&launch_year='+year;
+      previousLaunchValue = this.state.url + '&sort='+sortOption;
     }
-    this.setState({ isLoaded: false, url: previousLaunchValue, year: year});
+    this.setState({ isLoaded: false, url: previousLaunchValue});
 
     $.get(previousLaunchValue, function(result) {
       this.onDataReceived(result);
     }.bind(this));
   }
 
-  onLaunchChange = (flag) => {
+  onApplyFilter = (filterOptions, category) => {
+    debugger
     let previousLaunchValue = new URL(this.state.url);
+      previousLaunchValue.searchParams.set('filters-'+category.toLowerCase(), filterOptions.text.toLowerCase());
+      this.setState({ isLoaded: false, url: previousLaunchValue});
 
-    if (previousLaunchValue.searchParams.get('launch_success') !== null) {
-      previousLaunchValue.searchParams.set('launch_success', flag);
-      previousLaunchValue = previousLaunchValue.href;
-    } else {
-      previousLaunchValue = this.state.url+'&launch_success='+flag;
-    }
-
-    this.setState({ isLoaded: false, url: previousLaunchValue, launchFlag:flag });
-
-    $.get(previousLaunchValue, function(result) {
-      this.onDataReceived(result);
-    }.bind(this));
-  }
-
-  onLandChange = (flag) => {
-    let previousLaunchValue = new URL(this.state.url);
-
-    if (previousLaunchValue.searchParams.get('land_success') !== null) {
-      previousLaunchValue.searchParams.set('land_success', flag);
-      previousLaunchValue = previousLaunchValue.href;
-    } else {
-      previousLaunchValue = this.state.url+'&land_success='+flag;
-    }
-
-    this.setState({ isLoaded: false, url: previousLaunchValue, landFlag:flag});
-
-    $.get(previousLaunchValue, function(result) {
+    $.get(previousLaunchValue , function(result) {
       this.onDataReceived(result);
     }.bind(this));
   }
@@ -88,15 +63,20 @@ class App extends React.Component {
     if(this.state.isLoaded) {
       return (
         <>
-          <Container fluid>
-            <Row>
-              <h1 className='m-4'> SpacEx Launch Programs</h1>
+          <Container >
+            <Row height='50px'>
+              <Navbar />
             </Row>
-            <Row className='text-center'>
-              <Col md={4} sm={6}  className='mb-4 col-xs-12' ><Navbar year= {this.state.year} yearChange={this.onYearChange} onLaunchChange = {this.onLaunchChange} onLandChange = {this.onLandChange} launchFlag={this.state.launchFlag} landFlag={this.state.landFlag} /> </Col>
-
-              {this.state.data.length > 0 && <Col md={8} sm={6}> <CreateDataView data = {this.state.data}/> </Col>}
-              {this.state.data.length === 0 && <Col md={8} sm={6}>  <img width='100%' src={`${NoData}`} alt='No Data'></img> </Col> }
+            <Row>
+              <div className='product-info'>
+                Loreal-Paris - <span className='product-count'>  {this.state.data.data.totalCount} Products</span>
+              </div>
+            </Row>
+            <Row>
+              <FilterButtons data={this.state.data} onApplySort={this.onApplySort} onApplyFilter= {this.onApplyFilter} />
+            </Row>
+            <Row>
+              <LoadCards data={this.state.data.data.products}/>
             </Row>
           </Container>
         </>

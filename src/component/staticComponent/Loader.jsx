@@ -1,5 +1,5 @@
 import React from 'react';
-import LoaderGif from './loading.gif';
+import LoaderGif from './LoaderSvg';
 
 export default function Loader () {
     const style = {
@@ -21,7 +21,7 @@ export default function Loader () {
       }
     return (
         <div style={style.imageWrapper}> 
-            <img style={style.imageWidth} src={LoaderGif} className="loading" alt="Loading..." />
+            <LoaderGif />
         </div>
     )
 }
