@@ -49,14 +49,14 @@ code {
 }
 
 .card-block {
-  width: 47%;
+  max-width: 400px;
   color: #000;
+  min-width: 400px;
   padding: 20px;
   border-bottom: 1px solid #e3e3e3;
   margin: 1%;
-  display: flex;
   justify-content: center;
-  text-decoration: none !important;
+  text-decoration: none!important;
 }
 .card-block :hover {
   color: #000;
