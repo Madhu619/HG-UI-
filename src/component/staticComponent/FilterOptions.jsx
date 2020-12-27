@@ -97,7 +97,9 @@ const useStyles = makeStyles((theme) => ({
     background: '#ffa253',
     padding: '10px',
     border: 'navajowhite',
-    color: 'white'
+    color: 'white',
+    bottom: 0,
+    position: 'absolute'
   }
 }));
 
