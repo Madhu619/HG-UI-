@@ -62,8 +62,10 @@ code {
   color: #000;
 }
 .card-inner {
-  text-align: center;
-  position: relative;
+    text-align: center;
+    position: relative;
+    min-width: 400px;
+    max-width: 400px;
 }
 .card-image {
   height: 150px;
